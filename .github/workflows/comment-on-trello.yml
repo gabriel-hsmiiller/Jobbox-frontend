@@ -1,0 +1,19 @@
+name: GitHub Commit To Trello Comment
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: dalezak/github-commit-to-trello-card@main
+        with:
+          trello-api-key: 0228faaaf91e87dc7d0ec0b2b88cc4b9
+          trello-auth-token: 50f70ca64fa1e2b04da4dbfb68e2a16e096e6012552b6eec8182eef76d45bcc2
+          trello-board-id: 6221103cbe53d55fe8bed92e
+          trello-card-action: "Comment"
+          trello-list-name-commit: "In Progress"
+          trello-list-name-pr-closed: "Testing"
