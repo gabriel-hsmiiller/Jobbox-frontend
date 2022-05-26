@@ -1,0 +1,94 @@
+<div class="signup-container">
+    <div class="signup-cover">
+        <div class="signup-cover-image-and-slogan">
+            <img src="assets/img/signup_cover.svg">
+            <h2 class="slogan">
+                Comece agora mesmo e expanda<br>
+                seu portfólio!
+            </h2>
+        </div>
+        <div class="signup-cover-logo-container">
+            <jbx-logo-horizontal fillColor="#5A71B0"></jbx-logo-horizontal>
+        </div>
+    </div>
+    <div class="signup-data">
+        <div class="signup-data-user-icon">
+            <div class="signup-data-user-icon-container">
+                <img src="assets/img/la_user.svg">
+            </div>
+        </div>
+        <div class="signup-data-title">
+            <hr/>
+            <h1>Cadastro</h1>
+            <hr/>
+        </div>
+        <div class="signup-data-form">
+            <form [formGroup]="signupForm" (submit)="$event.preventDefault(); signup()">
+                <div class="signup-data-form-fields">
+                    <div>
+                        <input type="text" placeholder="Nome" formControlName="name">
+                        <mat-error *ngIf="controls.name.errors?.['required'] && controls.name.touched">
+                            Nome obrigatório
+                        </mat-error>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Sobrenome" formControlName="surname">
+                        <mat-error *ngIf="controls.surname.errors?.['required'] && controls.surname.touched">
+                            Sobrenome obrigatório
+                        </mat-error>
+                    </div>
+                    <div>
+                        <input type="email" placeholder="E-mail" formControlName="email">
+                        <mat-error *ngIf="controls.email.errors?.['email']">
+                            Insira um e-mail válido
+                        </mat-error>
+                        <mat-error *ngIf="controls.email.errors?.['required'] && controls.email.touched">
+                            E-mail obrigatório
+                        </mat-error>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Senha" formControlName="password">
+                        <mat-error *ngIf="controls.password.errors?.['minLength']">
+                            A senha precisa ter pelo menos 8 caracteres
+                        </mat-error>
+                        <mat-error *ngIf="controls.password.errors?.['maxLength']">
+                            A senha precisa ter no máximo 32 caracteres
+                        </mat-error>
+                        <mat-error *ngIf="controls.password.errors?.['pattern']">
+                            A senha precisa conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial
+                        </mat-error>
+                        <mat-error *ngIf="controls.password.errors?.['required'] && controls.password.touched">
+                            Senha obrigatória
+                        </mat-error>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Repita a senha" formControlName="confirmPassword">
+                        <mat-error *ngIf="signupForm.errors?.['notSamePassword']">
+                            As senhas não condizem
+                        </mat-error>
+                        <mat-error *ngIf="controls.confirmPassword.errors?.['required'] && controls.confirmPassword.touched">
+                            Confirme a senha
+                        </mat-error>
+                    </div>
+                    <div class="signup-data-form-options">
+                        <mat-checkbox color="primary" formControlName="termsOfUsage">
+                            <span>
+                                Eu li e aceito os <a>Termos de Uso</a>
+                            </span>
+                        </mat-checkbox>
+                        <mat-checkbox color="primary" formControlName="privacyPolicy">
+                            <span>
+                                Eu li e aceito a <a>Política de Privacidade</a>
+                            </span>
+                        </mat-checkbox>
+                    </div>
+                </div>
+                <div class="signup-data-form-button">
+                    <button type="submit" matRipple>Cadastrar</button>
+                    <a [routerLink]="'../login'">Já tem um acesso?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-background"></div>
+</div>

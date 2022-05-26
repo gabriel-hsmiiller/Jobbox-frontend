@@ -1,0 +1,35 @@
+<h1 mat-dialog-title class="title">Editar perfil</h1>
+<mat-dialog-content>
+    <form #profileData [formGroup]="editUserDataForm" (submit)="onSubmit($event)">
+        <div class="form-image">
+            <div class="form-image-container">
+                <img [src]="imagePreview ?? 'assets/img/camera.svg'">
+            </div>
+            <input type="file" accept="image/*" #imageInput style="visibility: hidden; width: 0;" formControlName="image" (change)="onChangeImage($event)">
+            <button (click)="$event.preventDefault(); imageInput.click()" type="button" mat-flat-button [color]="'accent'">Editar foto</button>
+            <span class="info-email">E-mail confirmado: <span [ngClass]="{ 'label-green' : confirmedEmail, 'label-red' : !confirmedEmail }">{{ confirmedEmail ? 'Sim' : 'Não' }}</span></span>
+        </div>
+        <div class="form-data-fields">
+            <mat-form-field appearance="outline">
+                <mat-label>Telefone</mat-label>
+                <input matInput type="tel" placeholder="Telefone" formControlName="phone" autocomplete="off">
+            </mat-form-field><br>
+            <input style="display: none;">
+            <input type="password" style="display: none;">
+            <mat-form-field appearance="outline" style="margin-right: 24px;">
+                <mat-label>Nova senha</mat-label>
+                <input matInput type="password" placeholder="Nova senha" formControlName="password" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmar nova senha</mat-label>
+                <input matInput type="password" placeholder="Confirmar nova senha" formControlName="confirmPassword" autocomplete="off">
+            </mat-form-field>
+        </div>
+        <button type="submit" style="display: none;" #buttonSubmit></button>
+    </form>
+    <button mat-flat-button [color]="'warn'" style="margin-top: 56px;" (click)="deactivateAccount()">Desativar conta</button>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button matDialogClose mat-flat-button>Cancelar</button>
+    <button (click)="buttonSubmit.click()" mat-flat-button [color]="'primary'">Salvar</button>
+</mat-dialog-actions>

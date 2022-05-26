@@ -1,0 +1,19 @@
+@import '../../assets/styles/colors';
+
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    h2 {
+        font-family: Jura;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: bold;
+        color: $orange-jbx;
+        margin-bottom: 40px;
+    }
+}

@@ -1,0 +1,61 @@
+<div class="login-container">
+    <div class="login-cover">
+        <div class="login-cover-image-and-slogan">
+            <img src="assets/img/login_cover.svg">
+            <h2 class="slogan">
+                Todos os seus trabalhos<br>
+                em um só lugar!
+            </h2>
+        </div>
+        <div class="login-cover-logo-container">
+            <jbx-logo-horizontal fillColor="#FF7A00"></jbx-logo-horizontal>
+        </div>
+    </div>
+    <div class="login-data">
+        <div class="login-data-user-icon">
+            <div class="login-data-user-icon-container">
+                <img src="assets/img/la_user.svg">
+            </div>
+        </div>
+        <div class="login-data-title">
+            <hr/>
+            <h1>Login</h1>
+            <hr/>
+        </div>
+        <div class="login-data-form">
+            <form [formGroup]="loginForm" (submit)="$event.preventDefault(); login()">
+                <div class="login-data-form-fields">
+                    <div>
+                        <input type="email" placeholder="E-mail" formControlName="email" [attr.error]="controls.email.touched && !!controls.email.errors">
+                        <mat-error *ngIf="controls.email.errors?.['email']">
+                            Insira um e-mail válido
+                        </mat-error>
+                        <mat-error *ngIf="controls.email.errors?.['required'] && controls.email.touched">
+                            E-mail obrigatório
+                        </mat-error>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Senha" formControlName="password" [attr.error]="controls.password.touched && !!controls.password.errors">
+                        <mat-error *ngIf="controls.password.errors?.['required'] && controls.password.touched">
+                            Senha obrigatória
+                        </mat-error>
+                        <div class="login-data-form-options">
+                            <a [routerLink]="null">Esqueceu sua senha?</a>
+                            <mat-checkbox labelPosition="before" color="primary" formControlName="rememberMe">Lembre de mim</mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-data-form-button">
+                    <button type="submit" matRipple>Entrar</button>
+                    <a [routerLink]="'../signup'">Novo por aqui?</a>
+                </div>
+            </form>
+        </div>
+        <div class="login-data-form-other-options">
+            <button matRipple class="enter-with-facebook"><img src="assets/img/facebook-icon.svg">Entrar com o Facebook</button>
+            <button matRipple class="enter-with-cc"><img src="assets/img/creative-cloud-icon.svg">Entrar com o CreativeCloud</button>
+            <button matRipple class="enter-with-google"><img src="assets/img/google-icon.svg">Entrar com o Google</button>
+        </div>
+    </div>
+    <div class="login-background"></div>
+</div>
