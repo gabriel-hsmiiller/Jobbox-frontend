@@ -1,0 +1,80 @@
+@import '../../assets/styles/colors';
+
+.home-container {
+    margin: 24px;
+    position: relative;
+}
+
+header {
+    background-color: $header-blue;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-container {
+        margin-left: 24px;
+    }
+
+    .nav-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 35%;
+
+        .nav-item-container {
+            opacity: .8;
+            cursor: pointer;
+
+            &.item-active {
+                opacity: 1;
+
+                img {
+                    box-sizing: content-box !important;
+                    border-bottom: solid 2px $orange-jbx;
+                }
+            }
+        }
+    }
+
+    .sign-out-container {
+        margin-right: 24px;
+        cursor: pointer;
+    }
+}
+
+.section-container {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100vh - 212px);
+    margin: 24px 0;
+
+    .router-container {
+        flex: 1;
+        background-color: $light-gray;
+        margin-right: 24px;
+        border-radius: 24px;
+        padding: 24px;
+        overflow-y: hidden;
+    }
+    
+    .conversations-list {
+        flex: 0;
+        background-color: white;
+        min-width: 20%;
+        height: 100%;
+        border: solid 1px transparent;
+        border-radius: 24px;
+        display: none;
+    }
+}
+
+.conversations-bar {
+    background-color: $medium-gray;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    height: 60px;
+    border-radius: 24px;
+}

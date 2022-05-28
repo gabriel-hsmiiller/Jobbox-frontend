@@ -1,0 +1,175 @@
+@import '../../assets/styles/colors';
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: 100%;
+
+    &-info {
+        color: $text-gray;
+        text-align: center;
+        position: relative;
+
+        &-edit {
+            position: absolute;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        ::ng-deep h2 {
+            font-family: Jura;
+            font-size: 32px;
+            line-height: 40px;
+            text-align: center;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+
+        &-image {
+            display: flex;
+            justify-content: center;
+
+            &-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: $light-blue-jbx;
+                height: 120px;
+                width: 120px;
+                position: relative;
+
+                .image {
+                    width: 120px;
+                    height: 120px;
+                    background-size: cover;
+                    border-radius: 50%;
+                    background-position: center;
+                }
+            }
+        }
+    }
+
+    &-gallery {
+        width: 100%;
+
+        &-item {
+            aspect-ratio: 1;
+            background-color: white;
+            min-width: 300px;
+            max-width: 600px;
+            flex: 1;
+
+            &-container {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 8px;
+                // display: flex;
+                // flex-wrap: wrap;
+                
+            }
+        }
+
+        .no-jobs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            ::ng-deep h3 {
+                font-family: Jura;
+                font-size: 32px;
+                line-height: 40px;
+                font-weight: bold;
+                color: $light-blue-jbx;
+            }
+        }
+    }
+
+    &-jobs {
+
+        &-info {
+            background-color: white;
+            border-radius: 24px;;
+            display: flex;
+            width: 100%;
+            max-width: 988px;
+            margin: 16px 0;
+            color: $text-gray;
+            font-size: larger;
+
+            .job-counter {
+                padding: 16px;
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .counter-divider {
+                width: 0;
+                height: 80%;
+            }
+        }
+
+        &-toggle-group {
+
+            width: 100%;
+            max-width: 988px;
+            margin-bottom: 24px;
+            
+            button {
+                background-color: white;
+                border: none;
+                border-radius: none;
+                padding: 24px;
+                color: $text-gray;
+                width: 50%;
+
+                span {
+                    font-size: large;
+                }
+
+                &.active {
+                    background-color: $orange-jbx;
+                    color: white;
+                }
+
+                &:first-of-type {
+                    border-top-left-radius: 24px;
+                    border-bottom-left-radius: 24px;
+                }
+
+                &:last-of-type {
+                    border-top-right-radius: 24px;
+                    border-bottom-right-radius: 24px;
+                }
+            }
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: $medium-dark-gray;
+        border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: $text-gray;
+    }
+}

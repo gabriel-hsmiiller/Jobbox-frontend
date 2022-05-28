@@ -1,0 +1,44 @@
+<div class="profile">
+    <div *ngIf="userData && userData.name" class="profile-info">
+        <div matRipple class="profile-info-edit" (click)="openEditModal()" *ngIf="userData?.id === +loggedUserId">
+            <img src="assets/img/edit.svg">
+        </div>
+        <div class="profile-info-image">
+            <div class="profile-info-image-container">
+                <div class="image" style="background-image: url({{ userImage ?? 'assets/img/la_user.svg' }});"></div>
+            </div>
+        </div>
+        <h2>{{ userData?.name }} {{ userData?.surname }}</h2>
+        <span>{{ userData?.email }}</span> {{ userData?.phone ? '&bull;' : '' }} <span>{{ userData?.phone || '' | phone }}</span>
+    </div>
+    <div *ngIf="userData && userData.name" class="profile-jobs-info">
+        <div class="job-counter done-jobs">0 trabalhos finalizados</div>
+        <hr class="counter-divider">
+        <div class="job-counter wip-jobs">0 trabalhos em andamento</div>
+    </div>
+    <div *ngIf="userData && userData.name" class="profile-jobs-toggle-group">
+        <button matRipple [ngClass]="{'active': selectedTab === 'done'}" (click)="selectTab('done')">
+            <span>Concluídos</span>
+        </button>
+        <button matRipple [ngClass]="{'active': selectedTab === 'wip'}" (click)="selectTab('wip')" >
+            <span>Em andamento</span>
+        </button>
+    </div>
+    <div class="profile-gallery">
+        <div *ngIf="selectedTab === 'done' && doneJobs.length > 0" class="profile-gallery-item-container">
+            <div class="profile-gallery-item" *ngFor="let item of doneJobs"></div>
+        </div>
+        <div *ngIf="selectedTab === 'wip' && wipJobs.length > 0" class="profile-gallery-item-container">
+            <div class="profile-gallery-item" *ngFor="let item of wipJobs"></div>
+        </div>
+        <div *ngIf="(selectedTab === 'done' && doneJobs.length <= 0) || (selectedTab === 'wip' && wipJobs.length <= 0)" class="no-jobs">
+            <h3>
+                {{ userData && userData.name 
+                    ? 'Oops... Não há nada aqui (ainda)' 
+                    : 'Oops... Usuário não encontrado' 
+                }}
+            </h3>
+            <img [src]="userData && userData.name ? 'assets/img/no_jobs_cover.svg' : 'assets/img/not_found_cover.svg'">
+        </div>
+    </div>
+</div>

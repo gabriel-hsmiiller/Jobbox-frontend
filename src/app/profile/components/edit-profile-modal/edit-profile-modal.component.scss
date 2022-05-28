@@ -1,0 +1,47 @@
+@import '../../../../assets/styles/colors';
+
+::ng-deep h1.title {
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.form-image {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+
+    &-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: $light-blue-jbx;
+        height: 120px;
+        width: 120px;
+        position: relative;
+        margin-right: 24px;
+
+        img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+    }
+
+    .info-email {
+        margin-left: 24px;
+        position: absolute;
+        top: 0;
+        left: 120px;
+
+        .label-green {
+            color: $green-jbx;
+        }
+
+        .label-red {
+            color: $red-jbx;
+        }
+    }
+}
