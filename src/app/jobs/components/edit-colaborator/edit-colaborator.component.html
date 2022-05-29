@@ -1,0 +1,59 @@
+<div class="title">
+    <h2>Editar job</h2>
+</div>
+<div class="job-body">
+    <div class="job-data">
+        <div class="job-data-labels">
+            <span>{{ jobData?.title || 'Sem título' }}</span>
+            <span class="description">{{ jobData?.description }}</span>
+            <span>{{ jobData?.expires_at ? (jobData?.expires_at | date:'dd/MM/yyyy') : 'Sem data de expiração' }}</span>
+        </div>
+        <div class="form-data">
+            <div class="form-fields">
+                <div class="file-list">
+                    <mat-chip-list >
+                        <mat-chip color="primary" selected (removed)="removeFile(file)" *ngFor="let file of selectedFiles">
+                            <mat-chip-avatar>
+                                <div *ngIf="file.preview?.includes('image'); else notImage" [style]="'background-image: url(' + file.preview + '); width: 100%; height: 100%; background-position: center; background-size: cover;'"></div>
+                                <ng-template #notImage>
+                                    <mat-icon>description</mat-icon>
+                                </ng-template>
+                            </mat-chip-avatar>
+                            <span>{{ file.filename }}</span>
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                                </button>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <button mat-flat-button color="accent" type="button" (click)="fileUpload.click()" *ngIf="jobData?.status?.status !== JobStatus.DONE && jobData?.status?.status !== JobStatus.IN_ANALYSIS">Selecionar arquivos</button>
+                <input type="file" #fileUpload style="display: none;" multiple (change)="handleFiles($event)">
+            </div>
+        </div>
+    </div>
+    <div class="job-timeline">
+        <h3>Atualizações</h3>
+        <div class="job-timeline-snapshots">
+            <div *ngFor="let snapshot of jobData?.snapshots?.reverse()" class="job-timeline-item">
+                <span class="job-timeline-time">{{ snapshot.updated_at | date:'dd/MM/yyyy' }}</span>
+                <hr class="job-timeline-line">
+                <div class="job-timeline-indicator"></div>
+                <div class="job-timeline-item-label">
+                    <span><a (click)="openSnapshotDetailDialog(snapshot)">{{ JobSnapshotChangeDetailTranslate[snapshot.changeDetail] || 'Status indefinido' }}</a> 
+                        &bull; {{ getResponsibleName(snapshot.responsibleUserId )}}</span>
+                </div>
+            </div>
+            <span>Criação: {{ jobData?.created_at | date: 'dd/MM/yyyy' }}</span>
+        </div>
+    </div>
+</div>
+<div class="bottom-buttons">
+    <div class="form-buttons">
+        <button mat-flat-button color="primary" (click)="onSubmit()" *ngIf="jobData?.status?.status !== JobStatus.DONE && jobData?.status?.status !== JobStatus.IN_ANALYSIS">
+            Confirmar
+        </button>
+        <button mat-flat-button type="button" (click)="navigateToList()">
+            Cancelar
+        </button>
+    </div>
+</div>

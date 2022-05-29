@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'jbx-home',
@@ -12,9 +12,11 @@ export class HomeComponent implements OnInit {
 
   activeLink = this.links.PROFILE;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const currentPath = this.route.snapshot.firstChild?.url[0].path;
+    this.activeLink = currentPath || 'home';
   }
 
   setActiveLink(link: string) {

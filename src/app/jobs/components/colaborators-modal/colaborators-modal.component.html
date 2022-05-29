@@ -1,0 +1,25 @@
+<h2 mat-dialog-title class="title">Editar colaboradores</h2>
+<mat-dialog-content>
+    <div class="modal-container">
+        <h3>Selecione colaboradores na lista abaixo</h3>
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Pesquisar</mat-label>
+            <input matInput [(ngModel)]="searchString">
+        </mat-form-field>
+        <form [formGroup]="colaboratorsForm" (submit)="$event.preventDefault(); onSubmit()">
+            <div class="colaborator-data-container" *ngFor="let user of colaborators">
+                <mat-checkbox color="accent" [formControlName]="user.colaborator!.id" *ngIf="getSearchedValue(user)">
+                    <div class="colaborator-data" matRipple>
+                        <img>
+                        <span>{{ user.name }} {{ user.surname }} ({{ user.email }})</span>
+                    </div>
+                </mat-checkbox>
+            </div>
+            <button #submit style="display: none;"></button>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button matDialogClose mat-flat-button>Cancelar</button>
+    <button (click)="submit.click()" mat-flat-button [color]="'primary'">Salvar</button>
+</mat-dialog-actions>

@@ -10,10 +10,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 import { PhonePipe } from '../pipes/phone.pipe';
+import { ConfirmDialog } from './confirm-dialog.component';
 
 @NgModule({
-  declarations: [PhonePipe],
+  declarations: [PhonePipe, ConfirmDialog],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,10 +32,16 @@ import { PhonePipe } from '../pipes/phone.pipe';
     MatDividerModule,
     MatDialogModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatChipsModule,
   ],
   exports: [
     PhonePipe,
+    ConfirmDialog,
     FormsModule,
     ReactiveFormsModule,
 		MatRippleModule,
@@ -40,7 +52,12 @@ import { PhonePipe } from '../pipes/phone.pipe';
     MatDividerModule,
     MatDialogModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatChipsModule,
 	],
   providers: []
 })

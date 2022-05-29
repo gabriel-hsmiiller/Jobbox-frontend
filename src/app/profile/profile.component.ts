@@ -79,12 +79,13 @@ export class ProfileComponent implements OnInit {
   }
 
   openEditModal() {
-    this.dialog.open(EditProfileModalComponent, {
+    const subscription = this.dialog.open(EditProfileModalComponent, {
       width: '988px',
       data: this.userData,
     }).afterClosed().subscribe(async () => {
       this.userData = JSON.parse(this.localStorageService.getKey(LocalStorageKey.USER_DATA) || '{}');
       await this.getUserAvatar();
+      subscription.unsubscribe();
     });
   }
 

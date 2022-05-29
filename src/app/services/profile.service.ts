@@ -17,6 +17,10 @@ export class ProfileService extends BaseHttpService {
     return super.get<User>('/user/find/i/' + id);
   }
 
+  getAllColaborators(): Observable<Array<User>> {
+    return super.get<Array<User>>('/user/find/c/');
+  }
+
   updateUserById(id: string, data: FormData): Observable<User> {
     return super.patch<User>('/user/update/' + id, data);
   }

@@ -1,4 +1,7 @@
 import { IUser } from "../interfaces/user";
+import { Admin } from "./admin";
+import { Client } from "./client";
+import { Colaborator } from "./colaborator";
 
 export class User implements IUser {
     private _id: number;
@@ -15,6 +18,9 @@ export class User implements IUser {
     private _deleted_at: Date;
     private _isActive: boolean;
     private _isConfirmed: boolean;
+    private _client?: Client;
+    private _colaborator?: Colaborator;
+    private _admin?: Admin;
 
     constructor(body: any) {
         this._id = body.id;
@@ -31,6 +37,9 @@ export class User implements IUser {
         this._deleted_at = body.deleted_at;
         this._isActive = body.isActive;
         this._isConfirmed = body.isConfirmed;
+        this._client = body.client;
+        this._colaborator = body.colaborator;
+        this._admin = body.admin;
     }
 
     static fromJson(body: string) {
@@ -121,6 +130,24 @@ export class User implements IUser {
     }
     public set isConfirmed(value: boolean) {
         this._isConfirmed = value;
+    }
+    public get client(): Client | undefined {
+        return this._client;
+    }
+    public set client(value: Client | undefined) {
+        this._client = value;
+    }
+    public get colaborator(): Colaborator | undefined {
+        return this._colaborator;
+    }
+    public set colaborator(value: Colaborator | undefined) {
+        this._colaborator = value;
+    }
+    public get admin(): Admin | undefined {
+        return this._admin;
+    }
+    public set admin(value: Admin | undefined) {
+        this._admin = value;
     }
 
 }

@@ -1,0 +1,39 @@
+<div class="title">
+    <h2>Criar novo job</h2>
+</div>
+<form [formGroup]="jobForm" (submit)="$event.preventDefault(); onSubmit()">
+    <div class="form-data">
+        <div class="form-fields">
+            <mat-form-field appearance="standard">
+                <mat-label>Título *</mat-label>
+                <input matInput type="text" formControlName="title">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Descrição *</mat-label>
+                <textarea matInput formControlName="description" rows="8"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Data de expiração <span *ngIf="getExpirationHasValidator()">*</span></mat-label>
+                <input matInput type="date" formControlName="expires_at" 
+                       [disabled]="!jobForm?.controls?.has_expiration?.value" 
+                       [attr.disabled]="!jobForm?.get('has_expiration')?.value ? true : null">
+            </mat-form-field>
+        </div>
+        <div class="form-sliders">
+            <mat-slide-toggle formControlName="has_expiration" color="accent" (change)="onChangeHasExpiration()">
+                Tem data de expiração
+            </mat-slide-toggle>
+            <mat-slide-toggle formControlName="autofill_colaborator" color="accent">
+                Selecionar colaborador automaticamente
+            </mat-slide-toggle>
+        </div>
+    </div>
+    <div class="form-buttons">
+        <button mat-flat-button color="primary" type="submit">
+            Confirmar
+        </button>
+        <button mat-flat-button type="button" (click)="navigateToList()">
+            Cancelar
+        </button>
+    </div>
+</form>

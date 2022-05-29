@@ -13,7 +13,7 @@ export class PhonePipe implements PipeTransform {
 
     const formatted = `(${ddd}) ${part1}-${part2}`
 
-    return formatted;
+    return value.toString().length > 0 ? formatted : '';
   }
 
 }

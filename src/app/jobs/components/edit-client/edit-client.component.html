@@ -1,0 +1,76 @@
+<div class="title">
+    <h2>Editar job</h2>
+</div>
+<div class="job-body">
+    <form [formGroup]="jobForm" (submit)="$event.preventDefault(); onSubmit()">
+        <div class="form-data">
+            <div class="form-fields">
+                <mat-form-field appearance="standard">
+                    <mat-label>Título *</mat-label>
+                    <input matInput type="text" formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Descrição *</mat-label>
+                    <textarea matInput formControlName="description" rows="8"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Data de expiração <span *ngIf="getExpirationHasValidator()">*</span></mat-label>
+                    <input matInput type="date" formControlName="expires_at" 
+                           [disabled]="!jobForm?.controls?.has_expiration?.value" 
+                           [attr.disabled]="!jobForm?.get('has_expiration')?.value ? true : null">
+                </mat-form-field>
+            </div>
+            <div class="form-sliders">
+                <mat-slide-toggle formControlName="has_expiration" color="accent" (change)="onChangeHasExpiration()">
+                    Tem data de expiração
+                </mat-slide-toggle>
+            </div>
+            <hr style="width: 80%;">
+            <div class="job-colaborators">
+                <h3>Colaboradores</h3>
+                <div class="job-colaborator-list">
+                    <div *ngFor="let colaborator of jobData?.colaborators" class="job-colaborator-item">
+                        <img [src]="'assets/img/la_user.svg'" width="24" height="24">
+                        <span>{{ colaborator.user.name }} {{ colaborator.user.surname }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button #submit style="display: none;" type="submit"></button>
+    </form>
+    <div class="job-timeline">
+        <h3>Atualizações</h3>
+        <div class="job-timeline-snapshots">
+            <span *ngIf="jobData?.status?.status === JobStatus.DONE">Finalização: {{ jobData?.snapshots?.reverse()![0].updated_at| date: 'dd/MM/yyyy' }}</span>
+            <div *ngFor="let snapshot of jobData?.snapshots?.reverse()" class="job-timeline-item">
+                <span class="job-timeline-time">{{ snapshot.updated_at | date:'dd/MM/yyyy' }}</span>
+                <hr class="job-timeline-line">
+                <div class="job-timeline-indicator"></div>
+                <div class="job-timeline-item-label">
+                    <span><a (click)="openSnapshotDetailDialog(snapshot)">{{ JobSnapshotChangeDetailTranslate[snapshot.changeDetail] || 'Status indefinido' }}</a> 
+                        &bull; {{ getResponsibleName(snapshot.responsibleUserId )}}</span>
+                </div>
+            </div>
+            <span>Criação: {{ jobData?.created_at | date: 'dd/MM/yyyy' }}</span>
+        </div>
+    </div>
+</div>
+<div class="bottom-buttons">
+    <div class="form-buttons">
+        <button mat-flat-button color="primary" (click)="submit.click()" *ngIf="jobData?.status?.status !== JobStatus.DONE">
+            Confirmar
+        </button>
+        <button mat-flat-button type="button" (click)="navigateToList()">
+            {{ jobData?.status?.status === JobStatus.DONE ? 'Voltar' : 'Cancelar' }}
+        </button>
+    </div>
+    <div class="approve-job" *ngIf="jobData?.status?.status === JobStatus.IN_REVISION">
+        <button mat-raised-button (click)="onApprove()" color="primary">
+            <mat-icon>check</mat-icon>
+            Aprovar entrega
+        </button>
+    </div>
+    <div class="job-colaborator-button">
+        <button mat-flat-button color="accent" (click)="openColaboratorsDialog()" *ngIf="jobData?.status?.status !== JobStatus.DONE">Gerenciar colaboradores <mat-icon>settings</mat-icon></button>
+    </div>
+</div>

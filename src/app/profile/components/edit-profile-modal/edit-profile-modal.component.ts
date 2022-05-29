@@ -7,6 +7,7 @@ import { LocalStorageKey } from 'src/app/enum/local-storage-key';
 import { User } from 'src/app/models/user';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { ConfirmDialog } from '../../../shared/confirm-dialog.component';
 
 @Component({
   selector: 'jbx-edit-profile-modal',
@@ -49,8 +50,8 @@ export class EditProfileModalComponent implements OnInit {
 
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
       
+      reader.readAsDataURL(file);
       reader.onload = () => {
         const result = reader.result as string;
         this.imagePreview = result;
@@ -126,25 +127,3 @@ export class EditProfileModalComponent implements OnInit {
 
 }
 
-@Component({
-  template: `
-    <h2 mat-dialog-title style="font-size: 24px !important;">Atenção</h2>
-    <mat-dialog-content>
-      <span>Essa ação é potencialmente destrutiva e irreparável.</span><br><br>
-      <span>Continuar?</span>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button matDialogClose mat-flat-button>Não</button>
-        <button (click)="confirmAction()" mat-flat-button [color]="'warn'">Sim</button>
-    </mat-dialog-actions>
-  `
-})
-export class ConfirmDialog {
-
-  constructor(public dialogRef: MatDialogRef<ConfirmDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  confirmAction() {
-    this.data.onConfirm();
-  }
-}

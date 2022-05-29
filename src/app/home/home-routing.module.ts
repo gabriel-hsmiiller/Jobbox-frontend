@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: 'profile', loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule) },
       { path: 'home' },
       { path: 'search' },
-      { path: 'job' },
+      { path: 'job', loadChildren: () => import('../jobs/jobs.module').then(m => m.JobsModule) },
       // { path: '**', component: NotFoundComponent }
     ]
   }

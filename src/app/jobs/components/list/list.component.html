@@ -1,0 +1,41 @@
+<div class="job-list-container">
+    <div class="job-list-header">
+        <h2>Meus Jobs</h2>
+        <div class="job-list-actions">
+            <div class="job-list-action-item" *ngIf="loggedUserType === UserType.CLIENT">
+                <button mat-raised-button color="primary" (click)="navigateToCreate()">Criar job</button>
+            </div>
+            <div class="job-list-action-item">
+                <mat-form-field appearance="outline" color="primary" style="margin-right: 16px;">
+                    <mat-label>Data inicial</mat-label>
+                    <input matInput type="date" [(ngModel)]="searchInitialDate">
+                </mat-form-field>
+                <mat-form-field appearance="outline" color="primary">
+                    <mat-label>Data máxima</mat-label>
+                    <input matInput type="date" [(ngModel)]="searchFinalDate">
+                </mat-form-field>
+            </div>
+            <div class="job-list-action-item input">
+                <mat-form-field appearance="outline" color="primary">
+                    <mat-label>Pesquisar</mat-label>
+                    <input matInput type="text" [(ngModel)]="searchString">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="job-list-table">
+        <div *ngFor="let column of jobsTable; let i = index" class="job-list-status-column">
+            <div class="column-header">{{ JobStatusTranslate[i] }}</div>
+            <div matRipple *ngFor="let item of column" class="job-list-item-card-container" (click)="navigateToJob(item)">
+                <div class="job-list-item-card" *ngIf="getSearchedValue(item)">
+                    <h3>#{{ item.id }}: {{ item.title || 'Sem título' }}</h3>
+                    <span class="job-list-item-description">{{ item.description | slice:0:50 }}{{ item.description.length > 50 ? '...' : '' }}</span>
+                    <span *ngIf="item.expires_at" class="job-list-item-description"> &bull; {{ item.expires_at | date:'dd/MM/yyyy' }}</span>
+
+                    <br>
+                    <button mat-icon-button (click)="$event.stopPropagation(); removeJob(item)"><img src="assets/img/delete.svg"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 
 @use '~@angular/material' as mat;
 @import './assets/styles/palette';
+@import './assets/styles/colors';
 
 @include mat.core();
 
@@ -18,7 +19,27 @@ $jobbox-frontend-theme: mat.define-light-theme((
 ));
 @include mat.all-component-themes($jobbox-frontend-theme);
 
-* { box-sizing: border-box; }
+* { 
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+      background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: $medium-dark-gray;
+      border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background: $text-gray;
+  }
+}
 html, body { height: 100%; overflow: hidden; }
 body { margin: 0; font-family: Asap, "Helvetica Neue", sans-serif; box-sizing: border-box; }
 

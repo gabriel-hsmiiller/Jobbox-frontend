@@ -155,21 +155,4 @@
             }
         }
     }
-
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-        background: $medium-dark-gray;
-        border-radius: 2px;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-        background: $text-gray;
-    }
 }

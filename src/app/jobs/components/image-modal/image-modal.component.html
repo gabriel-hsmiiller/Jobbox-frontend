@@ -1,0 +1,10 @@
+<div class="image-modal">
+    <button mat-icon-button class="close" matDialogClose><mat-icon>close</mat-icon></button>
+    <button mat-icon-button class="controls left" color="accent" (click)="prev()">
+        <mat-icon style="font-size: 40px; width: 40px; height: 40px; line-height: 40px;">chevron_left</mat-icon>
+    </button>
+    <div class="image" [style]="'background-image: url( ' + data.images[currentIndex].preview + ' )'"></div>
+    <button mat-icon-button class="controls right" color="accent" (click)="next()">
+        <mat-icon style="font-size: 40px; width: 40px; height: 40px; line-height: 40px;">chevron_right</mat-icon>
+    </button>
+</div>
