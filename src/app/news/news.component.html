@@ -1,0 +1,70 @@
+<div class="news-container">
+    <div class="news-comment">
+        <div class="news-comment-wrapper">
+            <mat-form-field appearance="outline">
+                <mat-label>Algo de novo?</mat-label>
+                <input matInput>
+                <button matSuffix mat-icon-button color="accent">
+                    <mat-icon>sticky_note_2</mat-icon>
+                </button>
+                <button matSuffix mat-icon-button color="accent">
+                    <mat-icon>format_quote</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="news-list">
+        <div class="news-item" *ngFor="let item of jobs;">
+            <div class="news-header">
+                <img *ngIf="!item.clientImage" class="news-header-image" src="assets/img/la_user.svg">
+                <div *ngIf="item.clientImage" class="news-header-image" [style]="'background-image: url(' + item.clientImage?.preview + ')'"></div>
+                <div class="news-header-name-time">
+                    <h2>
+                        <a routerLink="/profile/{{item.client?.user?.id}}">{{ item.client?.user?.name + ' ' + item.client?.user?.surname }}</a>
+                        <span *ngIf="item.colaborators?.length && item.colaborators?.length! > 1">
+                            e outros {{ item.colaborators?.length }}
+                        </span>
+                        <span *ngIf="item.colaborators?.length && item.colaborators?.length! <= 1">
+                            e <a routerLink="/profile/{{item.colaborators![0]?.user?.id}}">{{ item.colaborators![0]?.user?.name + ' ' + item.colaborators![0]?.user?.surname}}</a>
+                        </span>
+                    </h2>
+                    <span *ngIf="item.lastSnapshot?.updated_at">{{ item.lastSnapshot?.updated_at | date:'dd/MM/yyyy' }} às {{ item.lastSnapshot?.updated_at | date:'HH:mm' }}</span>
+                    <span *ngIf="!item.lastSnapshot?.updated_at">Sem data de atualização</span>
+                </div>
+            </div>
+        
+            <div class="news-body">
+                <div class="news-body-content">
+                    <div matRipple *ngFor="let content of item.portfolio.slice(0,3); let i = index" 
+                         class="news-body-content-item" (click)="openImageOverlay(i, item.portfolio)"
+                         [style]="'background-image: url( ' + content.preview + ' )'">
+                    </div>
+                    <div class="news-body-content-item more-items" matRipple 
+                         *ngIf="item.portfolio.length > 3" (click)="openImageOverlay(3, item.portfolio)"
+                         [style]="'background-image: url( ' + item.portfolio[3].preview + ' )'">
+                        <div class="cover">
+                            <span>
+                                +{{ item.portfolio.length - 3 }}
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="item.portfolio.length <= 0" class="news-body-content-item no-content">
+                        <h3>Esse job não possui conteúdo (ainda)</h3>
+                        <img [src]="'assets/img/no_jobs_cover.svg'">
+                    </div>
+                </div>
+                <div class="news-body-info">
+                    <div class="news-body-info-title">
+                        <h3>{{ item.lastSnapshot?.title || 'Sem título' }}</h3>
+                    </div>
+                    <p>{{ item.lastSnapshot?.description || 'Sem descrição' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="news-ended">
+            <h3>Por enquanto isso é tudo!</h3>
+        </div>
+    </div>
+</div>

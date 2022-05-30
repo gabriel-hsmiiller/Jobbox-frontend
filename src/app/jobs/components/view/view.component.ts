@@ -69,7 +69,6 @@ export class ViewComponent implements OnInit {
       await Promise.all(this.lastSnapshot.content.map(async (content) => {
         const file = await this.getContent(content);
         const reader = new FileReader();
-        let data;
 
         reader.readAsDataURL(file);
         reader.onload = () => {
@@ -78,8 +77,6 @@ export class ViewComponent implements OnInit {
 
           portfolios.push({ preview, original: file, filename });
         }
-
-        return data;
       }));
 
       this.portfolio = portfolios;

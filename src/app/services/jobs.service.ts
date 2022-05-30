@@ -22,6 +22,10 @@ export class JobsService extends BaseHttpService {
     return super.post<JobResponse>('/jobs', jobData);
   }
 
+  getAllJobs(): Observable<Array<Job>> {
+    return super.get<Array<Job>>('/jobs/');
+  }
+
   getJobsByUser(userId: number | string): Observable<Array<Job>> {
     return super.get<Array<Job>>('/jobs/u/' + userId);
   }

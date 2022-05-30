@@ -1,4 +1,5 @@
 <div class="image-modal">
+    <div class="name">{{ data.images[currentIndex].filename }}</div>
     <button mat-icon-button class="close" matDialogClose><mat-icon>close</mat-icon></button>
     <button mat-icon-button class="download" (click)="downloadContent()"><mat-icon>download</mat-icon></button>
     <button mat-icon-button class="controls left" color="accent" (click)="prev()">

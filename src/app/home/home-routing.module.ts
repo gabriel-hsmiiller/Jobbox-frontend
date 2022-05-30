@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule) },
-      { path: 'home' },
+      { path: 'home', loadChildren: () => import('../news/news.module').then(m => m.NewsModule) },
       { path: 'search' },
       { path: 'job', loadChildren: () => import('../jobs/jobs.module').then(m => m.JobsModule) },
       // { path: '**', component: NotFoundComponent }
