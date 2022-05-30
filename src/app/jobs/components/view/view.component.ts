@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -32,7 +33,8 @@ export class ViewComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private filesService: GetFilesService) { }
+    private filesService: GetFilesService,
+    private location: Location) { }
 
   async ngOnInit() {
     const loggedUserData = User.fromJson(this.localStorageService.getKey(LocalStorageKey.USER_DATA) || '');
@@ -92,5 +94,9 @@ export class ViewComponent implements OnInit {
   
   openImageOverlay(index: number) {
     this.dialog.open(ImageModalComponent, { height: '80vh', width: '80vw', data: {images: this.portfolio, index} })
+  }
+
+  navigateBack() {
+    this.location.back();
   }
 }

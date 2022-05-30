@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { PhonePipe } from '../pipes/phone.pipe';
 import { ConfirmDialog } from './confirm-dialog.component';
 
@@ -38,6 +39,7 @@ import { ConfirmDialog } from './confirm-dialog.component';
     MatPaginatorModule,
     MatIconModule,
     MatChipsModule,
+    MatTooltipModule,
   ],
   exports: [
     PhonePipe,
@@ -58,6 +60,7 @@ import { ConfirmDialog } from './confirm-dialog.component';
     MatPaginatorModule,
     MatIconModule,
     MatChipsModule,
+    MatTooltipModule,
 	],
   providers: []
 })

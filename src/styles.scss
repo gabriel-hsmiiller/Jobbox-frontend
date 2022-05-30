@@ -52,3 +52,7 @@ body { margin: 0; font-family: Asap, "Helvetica Neue", sans-serif; box-sizing: b
 button {
   cursor: pointer;
 }
+
+::ng-deep .tooltip-class {
+  background-color: red;
+}

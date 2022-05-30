@@ -5,7 +5,8 @@
         </div>
         <div class="profile-info-image">
             <div class="profile-info-image-container">
-                <div class="image" style="background-image: url({{ userImage ?? 'assets/img/la_user.svg' }});"></div>
+                <div *ngIf="!userImage" class="image" style="background-image: url(assets/img/la_user.svg);"></div>
+                <div *ngIf="userImage" class="image" [style]="'background-image: url(' + userImage + ');'"></div>
             </div>
         </div>
         <h2>{{ userData?.name }} {{ userData?.surname }}</h2>
@@ -26,10 +27,16 @@
     </div>
     <div class="profile-gallery">
         <div *ngIf="selectedTab === 'done' && doneJobs.length > 0" class="profile-gallery-item-container">
-            <div class="profile-gallery-item" *ngFor="let item of doneJobs"></div>
+            <div class="profile-gallery-item" matRipple *ngFor="let item of doneJobs" routerLink="/job/view/{{item.id}}">
+                <div class="image" *ngIf="item.cover" [style]="'background-image: url(' + item.cover + ')'"></div>
+                <div class="image" *ngIf="!item.cover" [style]="'background-image: url(assets/img/placeholder.png)'"></div>
+            </div>
         </div>
         <div *ngIf="selectedTab === 'wip' && wipJobs.length > 0" class="profile-gallery-item-container">
-            <div class="profile-gallery-item" *ngFor="let item of wipJobs"></div>
+            <div class="profile-gallery-item" matRipple *ngFor="let item of wipJobs" routerLink="/job/view/{{item.id}}">
+                <div class="image" *ngIf="item.cover" [style]="'background-image: url(' + item.cover + ')'"></div>
+                <div class="image" *ngIf="!item.cover" [style]="'background-image: url(assets/img/placeholder.png)'"></div>
+            </div>
         </div>
         <div *ngIf="(selectedTab === 'done' && doneJobs.length <= 0) || (selectedTab === 'wip' && wipJobs.length <= 0)" class="no-jobs">
             <h3>

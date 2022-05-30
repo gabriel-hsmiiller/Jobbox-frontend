@@ -5,18 +5,22 @@
         </div>
         <div class="nav-list">
             <div matRipple [matRippleUnbounded]="true" [matRippleCentered]="true" [matRippleColor]="'#FF7A0020'"
+                 matTooltip="Home" matTooltipShowDelay="2000" matTooltipClass="tooltip-class"
                  class="nav-item-container" [ngClass]="{ 'item-active' : activeLink === links.HOME }" (click)="setActiveLink(links.HOME)">
                 <img src="assets/img/news.svg" width="40" height="40">
             </div>
             <div matRipple [matRippleUnbounded]="true" [matRippleCentered]="true" [matRippleColor]="'#FF7A0020'"
+                 matTooltip="Perfil" matTooltipShowDelay="2000" matTooltipClass="tooltip-class"
                  class="nav-item-container" [ngClass]="{ 'item-active' : activeLink === links.PROFILE }" (click)="setActiveLink(links.PROFILE)">
                 <img src="assets/img/user.svg" width="40" height="40">
             </div>
             <div matRipple [matRippleUnbounded]="true" [matRippleCentered]="true" [matRippleColor]="'#FF7A0020'"
+                 matTooltip="Pesquisar" matTooltipShowDelay="2000" matTooltipClass="tooltip-class"
                  class="nav-item-container" [ngClass]="{ 'item-active' : activeLink === links.SEARCH }" (click)="setActiveLink(links.SEARCH)">
                 <img src="assets/img/search.svg" width="40" height="40">
             </div>
             <div matRipple [matRippleUnbounded]="true" [matRippleCentered]="true" [matRippleColor]="'#FF7A0020'"
+                 matTooltip="Jobs" matTooltipShowDelay="2000" matTooltipClass="tooltip-class"
                  class="nav-item-container" [ngClass]="{ 'item-active' : activeLink === links.JOB }" (click)="setActiveLink(links.JOB)">
                 <img src="assets/img/add_job.svg" width="40" height="40">
             </div>

@@ -33,4 +33,8 @@ export class ImageModalComponent implements OnInit {
     }
   }
 
+  downloadContent() {
+    window.open(URL.createObjectURL(this.data.images[this.currentIndex].original));
+  }
+
 }

@@ -12,7 +12,13 @@
                     e <a routerLink="/profile/{{colaborators![0]?.user?.id}}">{{ colaborators![0]?.user?.name + ' ' + colaborators![0]?.user?.surname}}</a>
                 </span>
             </h2>
-            <span>{{ lastSnapshot?.updated_at | date:'dd/MM/yyyy' }} às {{ lastSnapshot?.updated_at | date:'HH:mm' }}</span>
+            <span *ngIf="lastSnapshot?.updated_at">{{ lastSnapshot?.updated_at | date:'dd/MM/yyyy' }} às {{ lastSnapshot?.updated_at | date:'HH:mm' }}</span>
+            <span *ngIf="!lastSnapshot?.updated_at">Sem data de atualização</span>
+        </div>
+        <div class="back">
+            <button mat-icon-button (click)="navigateBack()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
         </div>
     </div>
 
@@ -31,12 +37,16 @@
                     </span>
                 </div>
             </div>
+            <div *ngIf="portfolio.length <= 0" class="view-body-content-item no-content">
+                <h3>Oops... Não há nada aqui (ainda)</h3>
+                <img [src]="'assets/img/no_jobs_cover.svg'">
+            </div>
         </div>
         <div class="view-body-info">
             <div class="view-body-info-title">
-                <h3>{{ lastSnapshot?.title }}</h3>
+                <h3>{{ lastSnapshot?.title || 'Sem título' }}</h3>
             </div>
-            <p>{{ lastSnapshot?.description }}</p>
+            <p>{{ lastSnapshot?.description || 'Sem descrição' }}</p>
         </div>
     </div>
 </div>
