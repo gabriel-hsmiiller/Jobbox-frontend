@@ -16,11 +16,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
 import { PhonePipe } from '../pipes/phone.pipe';
 import { ConfirmDialog } from './confirm-dialog.component';
+import { ParseUserPipe } from '../pipes/parse-user.pipe';
+import { ParseJobPipe } from '../pipes/parse-job.pipe';
+import { ParseAnyPipe } from '../pipes/parse-any.pipe';
 
 @NgModule({
-  declarations: [PhonePipe, ConfirmDialog],
+  declarations: [PhonePipe, ParseUserPipe, ParseJobPipe, ParseAnyPipe, ConfirmDialog],
   imports: [
     CommonModule,
     FormsModule,
@@ -40,9 +44,13 @@ import { ConfirmDialog } from './confirm-dialog.component';
     MatIconModule,
     MatChipsModule,
     MatTooltipModule,
+    MatSortModule,
   ],
   exports: [
     PhonePipe,
+    ParseUserPipe,
+    ParseJobPipe,
+    ParseAnyPipe,
     ConfirmDialog,
     FormsModule,
     ReactiveFormsModule,
@@ -61,6 +69,7 @@ import { ConfirmDialog } from './confirm-dialog.component';
     MatIconModule,
     MatChipsModule,
     MatTooltipModule,
+    MatSortModule,
 	],
   providers: []
 })

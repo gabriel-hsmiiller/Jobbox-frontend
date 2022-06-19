@@ -26,12 +26,24 @@ export class JobsService extends BaseHttpService {
     return super.get<Array<Job>>('/jobs/');
   }
 
+  getJobsByStatusForAdmin(status: JobStatus, showInactives = true): Observable<Array<Job>> {
+    return super.get<Array<Job>>('/jobs/a/' + status + '?showInactives=' + (showInactives ? '1' : '0'));
+  }
+
   getJobsByUser(userId: number | string): Observable<Array<Job>> {
     return super.get<Array<Job>>('/jobs/u/' + userId);
   }
 
   getJobById(jobId: number | string): Observable<Job> {
     return super.get<Job>('/jobs/i/' + jobId);
+  }
+
+  getJobsByTitle(title: string): Observable<Array<Job>> {
+    return super.get<Array<Job>>('/jobs/t/' + title);
+  }
+
+  getJobsByDescription(description: string): Observable<Array<Job>> {
+    return super.get<Array<Job>>('/jobs/d/' + description);
   }
 
   updateJob(jobId: number | string, updateData: FormData): Observable<JobResponse> {

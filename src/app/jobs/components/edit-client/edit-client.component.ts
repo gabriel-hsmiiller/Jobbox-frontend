@@ -109,7 +109,10 @@ export class EditClientComponent implements OnInit {
       }
 
       this.jobForm.patchValue(editJobData);
-      this.jobForm.get('title')?.disable();
+
+      if (response.status?.status !== JobStatus.CLOSED) {
+        this.jobForm.get('title')?.disable();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -154,7 +157,11 @@ export class EditClientComponent implements OnInit {
       name = user.name + ' ' + user.surname;
     } else {
       const colaborator = this.jobData.colaborators?.find(c => c.user.id === id);
-      name = colaborator?.user.name + ' ' + colaborator?.user.surname;
+      name = (colaborator?.user.name || '') + ' ' + (colaborator?.user.surname || '');
+    }
+
+    if (!name.trim()) {
+      name = 'Administrador';
     }
 
     return name;

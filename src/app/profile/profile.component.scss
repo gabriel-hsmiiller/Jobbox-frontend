@@ -58,6 +58,17 @@
         }
     }
 
+    &-admin {
+        margin-top: 40px;
+        h2 {
+            font-size: 40px;
+            line-height: 48px;
+            font-family: Jura;
+            font-weight: 500;
+            color: $orange-jbx;
+        }
+    }
+
     &-gallery {
         width: 100%;
 

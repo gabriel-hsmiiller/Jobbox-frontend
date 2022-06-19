@@ -93,6 +93,10 @@ export class ViewComponent implements OnInit {
     this.dialog.open(ImageModalComponent, { height: '80vh', width: '80vw', data: {images: this.portfolio, index} })
   }
 
+  openSnapshotsModal() {
+    
+  }
+
   navigateBack() {
     this.location.back();
   }

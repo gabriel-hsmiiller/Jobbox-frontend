@@ -1,0 +1,7 @@
+
+<div class="management-container">
+    <div *ngFor="let item of sections" class="management-item" [routerLink]="item.route">
+        <h2>{{ item.label }}</h2>
+        <img [src]="'assets/img/' + item.icon">
+    </div>
+</div>

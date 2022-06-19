@@ -57,7 +57,7 @@
 </div>
 <div class="bottom-buttons">
     <div class="form-buttons">
-        <button mat-flat-button color="primary" (click)="submit.click()" *ngIf="jobData?.status?.status !== JobStatus.DONE">
+        <button mat-flat-button color="primary" (click)="submit.click()" *ngIf="jobData?.status?.status !== JobStatus.DONE" [disabled]="jobData?.status?.status === JobStatus.IN_ANALYSIS">
             Confirmar
         </button>
         <button mat-flat-button type="button" (click)="navigateToList()">
@@ -71,6 +71,6 @@
         </button>
     </div>
     <div class="job-colaborator-button">
-        <button mat-flat-button color="accent" (click)="openColaboratorsDialog()" *ngIf="jobData?.status?.status !== JobStatus.DONE">Gerenciar colaboradores <mat-icon>settings</mat-icon></button>
+        <button mat-flat-button color="accent" (click)="openColaboratorsDialog()" *ngIf="jobData?.status?.status !== JobStatus.DONE" [disabled]="jobData?.status?.status === JobStatus.IN_ANALYSIS">Gerenciar colaboradores <mat-icon>settings</mat-icon></button>
     </div>
 </div>

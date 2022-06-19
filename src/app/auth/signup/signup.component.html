@@ -25,19 +25,19 @@
         <div class="signup-data-form">
             <form [formGroup]="signupForm" (submit)="$event.preventDefault(); signup()">
                 <div class="signup-data-form-fields">
-                    <div>
+                    <div class="signup-data-form-field-container">
                         <input type="text" placeholder="Nome" formControlName="name">
                         <mat-error *ngIf="controls.name.errors?.['required'] && controls.name.touched">
                             Nome obrigatório
                         </mat-error>
                     </div>
-                    <div>
+                    <div class="signup-data-form-field-container">
                         <input type="text" placeholder="Sobrenome" formControlName="surname">
                         <mat-error *ngIf="controls.surname.errors?.['required'] && controls.surname.touched">
                             Sobrenome obrigatório
                         </mat-error>
                     </div>
-                    <div>
+                    <div class="signup-data-form-field-container">
                         <input type="email" placeholder="E-mail" formControlName="email">
                         <mat-error *ngIf="controls.email.errors?.['email']">
                             Insira um e-mail válido
@@ -46,7 +46,7 @@
                             E-mail obrigatório
                         </mat-error>
                     </div>
-                    <div>
+                    <div class="signup-data-form-field-container">
                         <input type="password" placeholder="Senha" formControlName="password">
                         <mat-error *ngIf="controls.password.errors?.['minLength']">
                             A senha precisa ter pelo menos 8 caracteres
@@ -61,7 +61,7 @@
                             Senha obrigatória
                         </mat-error>
                     </div>
-                    <div>
+                    <div class="signup-data-form-field-container">
                         <input type="password" placeholder="Repita a senha" formControlName="confirmPassword">
                         <mat-error *ngIf="signupForm.errors?.['notSamePassword']">
                             As senhas não condizem

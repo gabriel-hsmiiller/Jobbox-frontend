@@ -7,6 +7,7 @@ import { LocalStorageKey } from 'src/app/enum/local-storage-key';
 import { User } from 'src/app/models/user';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { confirmPasswordValidator } from 'src/app/shared/validators/confirm-password';
 import { ConfirmDialog } from '../../../shared/confirm-dialog.component';
 
 @Component({
@@ -30,7 +31,7 @@ export class EditProfileModalComponent implements OnInit {
     private dialog: MatDialog,
     private localStorageService: LocalStorageService,
     private router: Router) { 
-      const {phone, image, id, isConfirmed} = data;
+      const {phone, id, isConfirmed} = data;
       this.userId = id.toString();
       this.confirmedEmail = isConfirmed;
 
@@ -38,8 +39,8 @@ export class EditProfileModalComponent implements OnInit {
         phone: new FormControl(phone || ''),
         password: new FormControl(''),
         confirmPassword: new FormControl(''),
-        image: new FormControl(image || ''),
-      });
+        image: new FormControl(null),
+      }, { validators: [confirmPasswordValidator] });
   }
 
   ngOnInit(): void { }
@@ -69,13 +70,17 @@ export class EditProfileModalComponent implements OnInit {
     const formData: FormData = new FormData();
 
     Object.keys(userData).forEach(key => {
-      if (userData[key] !== '') {
+      if (!!(userData[key])) {
+        console.log(key, !!(userData[key]));
         if (key === 'image') {
           formData.append(key, this.imageFile!);
         }
         formData.append(key, userData[key]);
       }
     });
+
+    console.log(userData);
+    console.log(formData.getAll('image'));
 
     try {
 

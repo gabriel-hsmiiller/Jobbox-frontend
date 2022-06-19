@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../security/auth.guard';
 import { CreateComponent } from './components/create/create.component';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { EditColaboratorComponent } from './components/edit-colaborator/edit-colaborator.component';
@@ -10,12 +11,12 @@ import { JobsComponent } from './jobs.component';
 const routes: Routes = [
   { 
     path: '', 
-    component: JobsComponent, 
+    component: JobsComponent,
     children: [
-      { path: '', component: ListComponent },
-      { path: 'create', component: CreateComponent },
-      { path: 'colaborator/edit/:id', component: EditColaboratorComponent },
-      { path: 'client/edit/:id', component: EditClientComponent },
+      { path: '', component: ListComponent, canActivate: [AuthGuard] },
+      { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
+      { path: 'colaborator/edit/:id', component: EditColaboratorComponent, canActivate: [AuthGuard] },
+      { path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard] },
       { path: 'view/:id', component: ViewComponent }
     ]
   }

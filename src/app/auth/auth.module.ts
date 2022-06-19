@@ -7,6 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { LogoHorizontalComponent } from './components/svg/logo-horizontal/logo-horizontal.component';
 import { SharedModule } from '../shared/shared.module';
+import { RecoveryComponent } from './recovery/recovery.component';
+import { TokenSentComponent } from './token-sent/token-sent.component';
+import { RecoveringComponent } from './recovering/recovering.component';
+import { RecoveredComponent } from './recovered/recovered.component';
 
 
 @NgModule({
@@ -15,6 +19,10 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     SignupComponent,
     LogoHorizontalComponent,
+    RecoveryComponent,
+    TokenSentComponent,
+    RecoveringComponent,
+    RecoveredComponent,
   ],
   imports: [
     CommonModule,

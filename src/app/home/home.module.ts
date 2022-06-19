@@ -15,7 +15,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class HomeModule { }

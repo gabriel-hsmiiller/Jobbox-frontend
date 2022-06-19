@@ -12,12 +12,15 @@
         <h2>{{ userData?.name }} {{ userData?.surname }}</h2>
         <span>{{ userData?.email }}</span> {{ userData?.phone ? '&bull;' : '' }} <span>{{ userData?.phone || '' | phone }}</span>
     </div>
-    <div *ngIf="userData && userData.name" class="profile-jobs-info">
-        <div class="job-counter done-jobs">0 trabalhos finalizados</div>
-        <hr class="counter-divider">
-        <div class="job-counter wip-jobs">0 trabalhos em andamento</div>
+    <div class="profile-admin" *ngIf="userType === UserType.ADMIN">
+        <h2>Usuário administrador</h2>
     </div>
-    <div *ngIf="userData && userData.name" class="profile-jobs-toggle-group">
+    <div *ngIf="userData && userData.name && userType !== UserType.ADMIN" class="profile-jobs-info">
+        <div class="job-counter done-jobs">{{ doneJobs.length || 0 }} trabalhos finalizados</div>
+        <hr class="counter-divider">
+        <div class="job-counter wip-jobs">{{ wipJobs.length || 0 }} trabalhos em andamento</div>
+    </div>
+    <div *ngIf="userData && userData.name && userType !== UserType.ADMIN" class="profile-jobs-toggle-group">
         <button matRipple [ngClass]="{'active': selectedTab === 'done'}" (click)="selectTab('done')">
             <span>Concluídos</span>
         </button>
@@ -25,7 +28,7 @@
             <span>Em andamento</span>
         </button>
     </div>
-    <div class="profile-gallery">
+    <div class="profile-gallery" *ngIf="userType !== UserType.ADMIN">
         <div *ngIf="selectedTab === 'done' && doneJobs.length > 0" class="profile-gallery-item-container">
             <div class="profile-gallery-item" matRipple *ngFor="let item of doneJobs" routerLink="/job/view/{{item.id}}">
                 <div class="image" *ngIf="item.cover" [style]="'background-image: url(' + item.cover + ')'"></div>

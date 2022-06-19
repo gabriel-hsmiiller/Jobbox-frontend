@@ -1,0 +1,39 @@
+
+<div class="visualize-report">
+    <button mat-icon-button color="primary" [print]="['printable-area', printConfig]">
+        <mat-icon>print</mat-icon>
+    </button>
+
+    <div id="printable-area" *ngIf="reportData && reportData.data">
+        <div class="visualize-report-header">
+            <div class="visualize-report-header-title-container">
+                <h2>Relatório: {{ reportData?._id }}</h2>
+                <h3>Data da criação: {{ reportData?.created_at | date:'dd/MM/yyyy HH:mm' }}</h3>
+                <h3>Descrição: {{ reportData?.description }}</h3>
+                <h3>Tema: {{ reportData?.theme }}</h3>
+            </div>
+            <div class="visualize-report-header-navigate-back-container print-none">
+                <a mat-icon-button [routerLink]="'../'">
+                    <mat-icon>arrow_back</mat-icon>
+                </a>
+            </div>
+        </div>
+        <div class="visualize-report-body">
+            <div *ngIf="dataHasJobStatus()">
+                <jbx-job-status></jbx-job-status>
+            </div>
+            <div *ngIf="!dataHasUserRegister()">
+                <jbx-user-register-last-month></jbx-user-register-last-month>
+            </div>
+            <div *ngIf="!dataHasUserRegister()">
+                <jbx-user-register></jbx-user-register>
+            </div>
+            <div *ngIf="!dataHasUserDeactivation()">
+                <jbx-user-deactivation-last-month></jbx-user-deactivation-last-month>
+            </div>
+            <div *ngIf="!dataHasUserDeactivation()">
+                <jbx-user-deactivation></jbx-user-deactivation>
+            </div>
+        </div>
+    </div>
+</div>

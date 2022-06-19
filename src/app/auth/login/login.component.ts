@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         if(response.token)
           this.localstorage.setkey(LocalStorageKey.USER_TYPE, response.type);
 
-        this.router.navigateByUrl('/profile');
+        this.router.navigateByUrl('/home');
       }
     } catch (error) {
       console.log(error);

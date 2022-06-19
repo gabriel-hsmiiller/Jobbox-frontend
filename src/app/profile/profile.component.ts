@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { JobStatus } from '../enum/job-status';
 import { LocalStorageKey } from '../enum/local-storage-key';
+import { UserType } from '../enum/user-type';
 import { Job } from '../models/job';
 import { User } from '../models/user';
 import { GetFilesService } from '../services/get-files.service';
@@ -22,6 +23,8 @@ export class ProfileComponent implements OnInit {
   private userId!: string;
   loggedUserId!: string;
   userImage: any;
+  userType!: UserType;
+  UserType = UserType;
 
   userData!: User;
   doneJobs: Array<any> = [];
@@ -52,11 +55,20 @@ export class ProfileComponent implements OnInit {
       this.userData = loggedUserData;
 
       await this.getUserAvatar();
-      await this.getJobsByUser();
+
+      this.userType = <UserType>this.localStorageService.getKey(LocalStorageKey.USER_TYPE);
+
+      if(this.userType !== UserType.ADMIN) await this.getJobsByUser();
     } else {
       const user = await this.profileService.getUserById(userId).toPromise();
       this.userId = userId;
       this.userData = user;
+
+      await this.getUserAvatar();
+
+      this.userType = user.admin ? UserType.ADMIN : user.client ? UserType.CLIENT : UserType.COLABORATOR;
+
+      if(this.userType !== UserType.ADMIN) await this.getJobsByUser();
     }
   }
 

@@ -25,7 +25,7 @@
         <div class="login-data-form">
             <form [formGroup]="loginForm" (submit)="$event.preventDefault(); login()">
                 <div class="login-data-form-fields">
-                    <div>
+                    <div class="login-data-form-field-container">
                         <input type="email" placeholder="E-mail" formControlName="email" [attr.error]="controls.email.touched && !!controls.email.errors">
                         <mat-error *ngIf="controls.email.errors?.['email']">
                             Insira um e-mail válido
@@ -34,13 +34,13 @@
                             E-mail obrigatório
                         </mat-error>
                     </div>
-                    <div>
+                    <div class="login-data-form-field-container">
                         <input type="password" placeholder="Senha" formControlName="password" [attr.error]="controls.password.touched && !!controls.password.errors">
                         <mat-error *ngIf="controls.password.errors?.['required'] && controls.password.touched">
                             Senha obrigatória
                         </mat-error>
                         <div class="login-data-form-options">
-                            <a [routerLink]="null">Esqueceu sua senha?</a>
+                            <a [routerLink]="'../recovery'">Esqueceu sua senha?</a>
                             <mat-checkbox labelPosition="before" color="primary" formControlName="rememberMe">Lembre de mim</mat-checkbox>
                         </div>
                     </div>

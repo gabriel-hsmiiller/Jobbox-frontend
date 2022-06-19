@@ -13,6 +13,10 @@ export class ProfileService extends BaseHttpService {
     super(httpClient);
   }
 
+  getAllUser(showInactives: boolean): Observable<Array<User>> {
+    return super.get<Array<User>>('/user?showInactives=' + (showInactives ? '1' : '0'));
+  }
+
   getUserById(id: string): Observable<User> {
     return super.get<User>('/user/find/i/' + id);
   }
@@ -21,8 +25,16 @@ export class ProfileService extends BaseHttpService {
     return super.get<Array<User>>('/user/find/c/');
   }
 
+  getUserByName(name: string): Observable<Array<User>> {
+    return super.get<Array<User>>('/user/find/n/' + name);
+  }
+
   updateUserById(id: string, data: FormData): Observable<User> {
     return super.patch<User>('/user/update/' + id, data);
+  }
+
+  updateUserStatus(id: string, status: boolean): Observable<User> {
+    return super.patch<User>('/user/updateStatus/' + id, { status });
   }
 
   deleteUserById(id: string): Observable<any> {

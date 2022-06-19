@@ -8,6 +8,10 @@ export class LocalStorageService {
 
   constructor() { }
 
+  clear() {
+    localStorage.clear();
+  }
+
   getKey(key: LocalStorageKey) {
     return localStorage.getItem(key);
   }
