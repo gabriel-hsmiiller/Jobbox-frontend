@@ -1,0 +1,52 @@
+<div class="view-container">
+    <div class="view-header">
+        <img *ngIf="!clientImage" class="view-header-image" src="assets/img/la_user.svg">
+        <div *ngIf="clientImage" class="view-header-image" [style]="'background-image: url(' + clientImage?.preview + ')'"></div>
+        <div class="view-header-name-time">
+            <h2>
+                <a routerLink="/profile/{{client?.user?.id}}">{{ client?.user?.name + ' ' + client?.user?.surname }}</a>
+                <span *ngIf="colaborators?.length && colaborators?.length! > 1">
+                    e outros {{ colaborators?.length }}
+                </span>
+                <span *ngIf="colaborators?.length && colaborators?.length! <= 1">
+                    e <a routerLink="/profile/{{colaborators![0]?.user?.id}}">{{ colaborators![0]?.user?.name + ' ' + colaborators![0]?.user?.surname}}</a>
+                </span>
+            </h2>
+            <span *ngIf="lastSnapshot?.updated_at">{{ lastSnapshot?.updated_at | date:'dd/MM/yyyy' }} às {{ lastSnapshot?.updated_at | date:'HH:mm' }}</span>
+            <span *ngIf="!lastSnapshot?.updated_at">Sem data de atualização</span>
+        </div>
+        <div class="back">
+            <button mat-icon-button (click)="navigateBack()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="view-body">
+        <div class="view-body-content">
+            <div matRipple *ngFor="let content of portfolio.slice(0,3); let i = index" 
+                 class="view-body-content-item" (click)="openImageOverlay(i)"
+                 [style]="'background-image: url( ' + content.preview + ' )'">
+            </div>
+            <div class="view-body-content-item more-items" matRipple 
+                 *ngIf="portfolio.length > 3" (click)="openImageOverlay(3)"
+                 [style]="'background-image: url( ' + portfolio[3].preview + ' )'">
+                <div class="cover">
+                    <span>
+                        +{{ portfolio.length - 3 }}
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="portfolio.length <= 0" class="view-body-content-item no-content">
+                <h3>Oops... Não há nada aqui (ainda)</h3>
+                <img [src]="'assets/img/no_jobs_cover.svg'">
+            </div>
+        </div>
+        <div class="view-body-info">
+            <div class="view-body-info-title">
+                <h3>{{ lastSnapshot?.title || 'Sem título' }}</h3>
+            </div>
+            <p>{{ lastSnapshot?.description || 'Sem descrição' }}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="recovery-container">
+    <div class="recovery-cover">
+        <div class="recovery-cover-image-and-slogan">
+            <img src="assets/img/recovery_cover.svg">
+        </div>
+        <div class="recovery-cover-logo-container">
+            <jbx-logo-horizontal fillColor="#FFC32A"></jbx-logo-horizontal>
+        </div>
+    </div>
+    <div class="recovery-data">
+        <div class="recovery-data-key-icon">
+            <div class="recovery-data-key-icon-container">
+                <img src="assets/img/la_key_forgot.svg">
+            </div>
+        </div>
+        <div class="recovery-data-title">
+            <hr/>
+            <h1>Recuperação<br>de Senha</h1>
+            <hr/>
+        </div>
+        <div class="recovery-data-form">
+            <form [formGroup]="recoveryForm" (submit)="$event.preventDefault(); recovery()">
+                <div class="recovery-data-form-fields">
+                    <div class="recovery-data-form-field-container">
+                        <input type="email" placeholder="E-mail" formControlName="email">
+                        <mat-error *ngIf="controls.email.errors?.['email']">
+                            Insira um e-mail válido
+                        </mat-error>
+                        <mat-error *ngIf="controls.email.errors?.['required'] && controls.email.touched">
+                            E-mail obrigatório
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="recovery-data-form-button">
+                    <button type="submit" matRipple>Recuperar senha</button>
+                    <a [routerLink]="'../login'">Lembrou seu acesso?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="recovery-background"></div>
+</div>

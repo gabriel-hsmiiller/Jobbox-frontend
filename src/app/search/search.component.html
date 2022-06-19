@@ -1,0 +1,58 @@
+<div class="search" style="height: 100%;">
+    <div class="search-header">
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>Digite sua busca</mat-label>
+            <input matInput [(ngModel)]="searchString" (ngModelChange)="searchStringDebounce.next($event)">
+        </mat-form-field>
+        <div class="search-chips-container" *ngIf="containJob() || containUser()">
+            <mat-chip-list multiple="true" (change)="onFilterChange($event.value)" #list>
+                <mat-chip color="accent" value="JOBS" *ngIf="containJob()">Jobs</mat-chip>
+                <mat-chip color="accent" value="USERS" *ngIf="containUser()">Usuários</mat-chip>
+                <mat-chip color="accent" value="COLABORATORS" *ngIf="selectedFilters.includes('USERS')">Colaboradores</mat-chip>
+                <mat-chip color="accent" value="CLIENTS" *ngIf="selectedFilters.includes('USERS')">Clientes</mat-chip>
+                <mat-chip color="accent" value="ADMINISTRATORS" *ngIf="selectedFilters.includes('USERS')">Administradores</mat-chip>
+                <mat-chip color="accent" value="IN_PROGRESS" *ngIf="selectedFilters.includes('JOBS')">Em progresso</mat-chip>
+                <mat-chip color="accent" value="DONE" *ngIf="selectedFilters.includes('JOBS')">Concluídos</mat-chip>
+                <mat-chip color="accent" value="FREE" *ngIf="selectedFilters.includes('JOBS')">Disponíveis</mat-chip>
+            </mat-chip-list>
+            <mat-hint>Selecione clicando no item e apertando espaço</mat-hint>
+        </div>
+    </div>
+    <div class="search-body">
+        <div *ngFor="let item of showData" class="search-body-list">
+            <div *ngIf="getIsJob(item)" class="search-body-list-item item-job" [routerLink]="'../job/view/' + item.id">
+                <div class="user-container">
+                    <img *ngIf="!(item | parseAny).userImage" class="user-image" src="assets/img/la_user.svg">
+                    <div *ngIf="(item | parseAny).userImage"
+                         class="user-image" [style]="'background-image: url( ' + (item | parseAny).userImage.preview + ' )'"></div>
+                    <div class="user-data">
+                        <p>{{ (item | parseJob).client?.user?.name }} {{ (item | parseJob).client?.user?.surname }}</p>
+                        <p>{{ (item | parseJob).updated_at | date:'dd/MM/yyyy' }} &bull; {{ (item | parseJob).title }}</p>
+                    </div>
+                </div>
+                <div class="job-container">
+                    <div *ngIf="(item | parseAny).image?.preview"
+                         class="job-image" [style]="'background-image: url( ' + (item | parseAny).image?.preview + ' )'"></div>
+                    <div *ngIf="!(item | parseAny).image?.preview" class="job-image no-content">
+                        <img [src]="'assets/img/placeholder.png'">
+                    </div>
+                    <div class="job-data">
+                        <p>{{ (item | parseJob).description | slice:0:200 }}{{ (item | parseJob).description.length > 200 ? '...' : '' }} </p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="getIsUser(item)" class="search-body-list-item item-user user-container" [routerLink]="'../profile/' + item.id">
+                <img *ngIf="!(item | parseAny).userImage" class="user-image" src="assets/img/la_user.svg">
+                <div *ngIf="(item | parseAny).userImage"
+                     class="user-image" [style]="'background-image: url( ' + (item | parseAny).userImage?.preview + ' )'"></div>
+                <div class="user-data">
+                    <p>{{ (item | parseUser).name }} {{ (item | parseUser).surname }}</p>
+                    <p>{{ (item | parseUser).colaborator ? 'Colaborador' : (item | parseUser).client ? 'Cliente' : 'Administrador' }}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="showData.length <= 0">
+            <h3>Nenhum resultado</h3>
+        </div>
+    </div>
+</div>

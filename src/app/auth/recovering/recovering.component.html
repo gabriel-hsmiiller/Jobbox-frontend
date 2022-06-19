@@ -1,0 +1,57 @@
+<div class="recovering-container">
+    <div class="recovering-cover">
+        <div class="recovering-cover-image-and-slogan">
+            <img src="assets/img/recovering_cover.svg">
+        </div>
+        <div class="recovering-cover-logo-container">
+            <jbx-logo-horizontal fillColor="#FF4545"></jbx-logo-horizontal>
+        </div>
+    </div>
+    <div class="recovering-data">
+        <div class="recovering-data-key-icon">
+            <div class="recovering-data-key-icon-container">
+                <img src="assets/img/la_key.svg">
+            </div>
+        </div>
+        <div class="recovering-data-title">
+            <hr/>
+            <h1>Recuperação<br>de Senha</h1>
+            <hr/>
+        </div>
+        <div class="recovering-data-form">
+            <form [formGroup]="recoveringForm" (submit)="$event.preventDefault(); recovery()">
+                <div class="recovering-data-form-fields">
+                    <div class="recovering-data-form-field-container">
+                        <input type="password" placeholder="Nova senha" formControlName="newPassword">
+                        <mat-error *ngIf="controls.newPassword.errors?.['minLength']">
+                            A senha precisa ter pelo menos 8 caracteres
+                        </mat-error>
+                        <mat-error *ngIf="controls.newPassword.errors?.['maxLength']">
+                            A senha precisa ter no máximo 32 caracteres
+                        </mat-error>
+                        <mat-error *ngIf="controls.newPassword.errors?.['pattern']">
+                            A senha precisa conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial
+                        </mat-error>
+                        <mat-error *ngIf="controls.newPassword.errors?.['required'] && controls.newPassword.touched">
+                            Senha obrigatória
+                        </mat-error>
+                    </div>
+                    <div class="recovering-data-form-field-container">
+                        <input type="password" placeholder="Repita a nova senha" formControlName="confirmNewPassword">
+                        <mat-error *ngIf="recoveringForm.errors?.['notSamePassword']">
+                            As senhas não condizem
+                        </mat-error>
+                        <mat-error *ngIf="controls.confirmNewPassword.errors?.['required'] && controls.confirmNewPassword.touched">
+                            Confirme a senha
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="recovering-data-form-button">
+                    <button type="submit" matRipple>Recuperar senha</button>
+                    <a [routerLink]="'../login'">Lembrou seu acesso?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="recovering-background"></div>
+</div>

@@ -1,0 +1,253 @@
+<div class="management-users">
+    <div class="management-users-header">
+        <div class="management-users-header-title-container">
+            <h2>Gerenciar Usuários</h2>
+        </div>
+        <div class="management-users-header-navigate-back-container">
+            <a mat-icon-button [routerLink]="'../'">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+        </div>
+    </div>
+    <div class="management-users-body">
+        <mat-tab-group animationDuration="300ms" color="primary" backgroundColor="primary">
+            <mat-tab label="Colaboradores">
+                <div class="management-users-tab-options">
+                    <div class="management-users-filter-container">
+                        <mat-form-field color="accent">
+                            <mat-label>Filtrar</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="management-users-inactives-container">
+                        <mat-slide-toggle color="accent" [(ngModel)]="showInactives">Mostrar inativos</mat-slide-toggle>
+                    </div>
+                    <div class="management-users-refresh-container">
+                        <button mat-icon-button color="accent" (click)="getAllUsers()">
+                            <mat-icon class="refresh-button">refresh</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.surname }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+                        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="isActive">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="display: none;"></th>
+                        <td mat-cell *matCellDef="let element" style="display: none;"></td>
+                    </ng-container>
+                    <ng-container matColumnDef="expanded_details">
+                        <td mat-cell *matCellDef="let element" colspan="5">
+                            <div class="table-detail-container" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                                <p>
+                                    <span class="bold">Telefone: </span>
+                                    <span>{{ (element.phone | phone) || 'Sem telefone' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de nascimento: </span>
+                                    <span>{{ (element.birthDate | date:'dd/MM/yyyy') || 'Não informado' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de registro: </span>
+                                    <span>{{ element.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">E-mail confirmado: </span>
+                                    <span>{{ element.isConfirmed ? 'Sim' : 'Não' }}</span>
+                                </p>
+
+                                <button *ngIf="element.isActive" mat-raised-button color="warn" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Desativar</button>
+                                <button *ngIf="!element.isActive" mat-raised-button color="primary" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Ativar</button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;" 
+                        [ngClass]="element.isActive ? 'table-active-item' : 'table-inactive-item'"
+                        [class.table-expanded-row]="expandedElement === element"
+                        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expanded_details']" class="table-detail-row"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5">{{ noDataMessage }}</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[10, 25]"></mat-paginator>
+            </mat-tab>
+            <mat-tab label="Clientes">
+                <div class="management-users-tab-options">
+                    <div class="management-users-filter-container">
+                        <mat-form-field color="accent">
+                            <mat-label>Filtrar</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="management-users-inactives-container">
+                        <mat-slide-toggle color="accent" [(ngModel)]="showInactives">Mostrar inativos</mat-slide-toggle>
+                    </div>
+                    <div class="management-users-refresh-container">
+                        <button mat-icon-button color="accent" (click)="getAllUsers()">
+                            <mat-icon class="refresh-button">refresh</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.surname }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+                        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="isActive">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="display: none;"></th>
+                        <td mat-cell *matCellDef="let element" style="display: none;"></td>
+                    </ng-container>
+                    <ng-container matColumnDef="expanded_details">
+                        <td mat-cell *matCellDef="let element" colspan="5">
+                            <div class="table-detail-container" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                                <p>
+                                    <span class="bold">Telefone: </span>
+                                    <span>{{ (element.phone | phone) || 'Sem telefone' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de nascimento: </span>
+                                    <span>{{ (element.birthDate | date:'dd/MM/yyyy') || 'Não informado' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de registro: </span>
+                                    <span>{{ element.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">E-mail confirmado: </span>
+                                    <span>{{ element.isConfirmed ? 'Sim' : 'Não' }}</span>
+                                </p>
+
+                                <button *ngIf="element.isActive" mat-raised-button color="warn" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Desativar</button>
+                                <button *ngIf="!element.isActive" mat-raised-button color="primary" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Ativar</button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;" 
+                        [ngClass]="element.isActive ? 'table-active-item' : 'table-inactive-item'"
+                        [class.table-expanded-row]="expandedElement === element"
+                        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expanded_details']" class="table-detail-row"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5">{{ noDataMessage }}</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[10, 25]"></mat-paginator>
+            </mat-tab>
+            <mat-tab label="Administradores">
+                <div class="management-users-tab-options">
+                    <div class="management-users-filter-container">
+                        <mat-form-field color="accent">
+                            <mat-label>Filtrar</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="management-users-inactives-container">
+                        <mat-slide-toggle color="accent" [(ngModel)]="showInactives">Mostrar inativos</mat-slide-toggle>
+                    </div>
+                    <div class="management-users-refresh-container">
+                        <button mat-icon-button color="accent" (click)="getAllUsers()">
+                            <mat-icon class="refresh-button">refresh</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
+                        <td mat-cell *matCellDef="let element">{{ element.surname }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+                        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="isActive">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="display: none;"></th>
+                        <td mat-cell *matCellDef="let element" style="display: none;"></td>
+                    </ng-container>
+                    <ng-container matColumnDef="expanded_details">
+                        <td mat-cell *matCellDef="let element" colspan="5">
+                            <div class="table-detail-container" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                                <p>
+                                    <span class="bold">Telefone: </span>
+                                    <span>{{ (element.phone | phone) || 'Sem telefone' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de nascimento: </span>
+                                    <span>{{ (element.birthDate | date:'dd/MM/yyyy') || 'Não informado' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">Data de registro: </span>
+                                    <span>{{ element.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+                                </p>
+                                <p>
+                                    <span class="bold">E-mail confirmado: </span>
+                                    <span>{{ element.isConfirmed ? 'Sim' : 'Não' }}</span>
+                                </p>
+
+                                <button *ngIf="element.isActive" mat-raised-button color="warn" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Desativar</button>
+                                <button *ngIf="!element.isActive" mat-raised-button color="primary" style="margin-bottom: 16px" (click)="setUserStatus(element.id)">Ativar</button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;" 
+                        [ngClass]="element.isActive ? 'table-active-item' : 'table-inactive-item'"
+                        [class.table-expanded-row]="expandedElement === element"
+                        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expanded_details']" class="table-detail-row"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5">{{ noDataMessage }}</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[10, 25]"></mat-paginator>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

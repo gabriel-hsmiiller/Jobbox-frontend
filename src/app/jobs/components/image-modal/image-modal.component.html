@@ -1,0 +1,15 @@
+<div class="image-modal">
+    <div class="name">{{ data.images[currentIndex].filename }}</div>
+    <button mat-icon-button class="close" matDialogClose><mat-icon>close</mat-icon></button>
+    <button mat-icon-button class="download" (click)="downloadContent()"><mat-icon>download</mat-icon></button>
+    <button mat-icon-button class="controls left" color="accent" (click)="prev()">
+        <mat-icon style="font-size: 40px; width: 40px; height: 40px; line-height: 40px;">chevron_left</mat-icon>
+    </button>
+    <div class="image" *ngIf="data.images[currentIndex].preview.includes('image')" 
+         [style]="'background-image: url(' + data.images[currentIndex].preview + ')'"></div>
+    <div class="image" *ngIf="!data.images[currentIndex].preview.includes('image')"
+         [style]="'background-image: url(assets/img/file_placeholder.png); width: 50%; height: 50%;'"></div>
+    <button mat-icon-button class="controls right" color="accent" (click)="next()">
+        <mat-icon style="font-size: 40px; width: 40px; height: 40px; line-height: 40px;">chevron_right</mat-icon>
+    </button>
+</div>

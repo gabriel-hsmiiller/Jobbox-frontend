@@ -1,0 +1,188 @@
+@import '../../assets/styles/colors';
+
+.news-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.news-list {
+    overflow-y: auto;
+}
+
+.news {
+
+    &-comment {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+
+        &-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+
+    &-item {
+        width: 100%;
+        height: calc(100% + 128px);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        border: solid 1px rgba($text-gray, .6);
+        border-radius: 24px;
+        margin: 24px 0;
+        padding: 24px;
+        background-color: white;
+    }
+
+    &-header {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        &-image {
+            width: 64px;
+            height: 64px;
+            background-position: center;
+            background-size: cover;
+            border-radius: 50%;
+            background-color: $orange-jbx;
+        }
+
+        &-name-time {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-around;
+            margin-left: 16px;
+
+            ::ng-deep h2 {
+                span, a { font-size: 18px; line-height: 18px; }
+                margin-bottom: 4px;
+                a { color: $light-blue-jbx; text-decoration: none; &:hover { text-decoration: underline } }
+            }
+        }
+
+        .back {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+    }
+
+    &-body {
+        width: 100%;
+        height: calc(100% - 64px);
+        display: flex;
+        align-items: center;
+
+        &-content {
+            flex: 2;
+            display: grid;
+            gap: 8px;
+            grid-template-rows: repeat(auto-fit, minmax(275px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            max-height: 600px;
+    
+            .no-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
+                cursor: default;
+
+                ::ng-deep h3 {
+                    font-family: Jura;
+                    font-size: 32px;
+                    line-height: 40px;
+                    font-weight: bold;
+                    color: $light-blue-jbx;
+                }
+            }
+
+            &-item {
+                position: relative;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-color: $light-gray;
+                border: solid 1px rgba($text-gray, .3);
+                border-radius: 24px;
+                cursor: pointer;
+
+                &.more-items {
+
+                    .cover {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background-color: rgba($text-gray, .6);
+                        z-index: 10;
+
+                        span {
+                            color: white;
+                            font-size: 48px;
+                            line-height: 56px;
+                            text-shadow: 0 0 8px black;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-info {
+            flex: 1;
+            align-self: stretch;
+            margin: 24px;
+            overflow-y: auto;
+            position: relative;
+            padding: 0 16px 16px 16px;
+            border-left: solid 1px rgba($text-gray, .6);
+
+            &-title {
+                position: sticky;
+                top: 0;
+                background-color: white;
+                padding: 16px 0;
+
+                ::ng-deep h3 {
+                    font-size: 24px;
+                    line-height: 32px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    &-ended {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: dashed 1px rgba($text-gray, .6);
+        padding-top: 24px;
+
+        ::ng-deep h3 {
+            font-family: Jura;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: bold;
+            color: $light-blue-jbx;
+        }
+    }
+}

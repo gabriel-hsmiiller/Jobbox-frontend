@@ -58,15 +58,35 @@
         }
     }
 
+    &-admin {
+        margin-top: 40px;
+        h2 {
+            font-size: 40px;
+            line-height: 48px;
+            font-family: Jura;
+            font-weight: 500;
+            color: $orange-jbx;
+        }
+    }
+
     &-gallery {
         width: 100%;
 
         &-item {
             aspect-ratio: 1;
-            background-color: white;
+            background-color: $medium-gray;
             min-width: 300px;
             max-width: 600px;
+            border-radius: 4px;
             flex: 1;
+            cursor: pointer;
+
+            .image {
+                width: 100%;
+                height: 100%;
+                background-position: center;
+                background-size: cover;
+            }
 
             &-container {
                 width: 100%;
@@ -154,22 +174,5 @@
                 }
             }
         }
-    }
-
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-        background: $medium-dark-gray;
-        border-radius: 2px;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-        background: $text-gray;
     }
 }

@@ -1,0 +1,22 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_622_386)">
+<!-- <g filter="url(#filter0_d_622_386)"> -->
+<path d="M80 25C60.5 25 45 40.5 45 60C44.9658 65.7343 46.3492 71.3883 49.0272 76.459C51.7052 81.5297 55.5948 85.8601 60.35 89.065C42.55 96.73 30 114.46 30 135H40C40 113 58 95 80 95C99.5 95 115 79.5 115 60C115 40.5 99.5 25 80 25ZM80 35C94 35 105 46 105 60C105 74 94 85 80 85C66 85 55 74 55 60C55 46 66 35 80 35ZM120.5 90V100.5C117.5 101 114.5 102.5 112 104L104.5 96.5L97.5 103.5L105 111C103 113.5 102 116.5 101.5 120H90V130H100.5C101 133 102.5 136 104 139L96.5 146.5L103.5 153.5L111 146C113.5 147.5 116.5 149 119.5 149.5V160H129.5V149.5C132.5 149 135.5 147.5 138 146L145.5 153.5L152.5 146.5L145 139C147 136.5 148 133.5 148.5 130H160V120H149.5C149 117 147.5 114 146 111L153.5 103.5L146.5 96.5L139 104C136.5 102.5 133.5 101 130.5 100.5V90H120.5ZM125 110C133.5 110 140 116.5 140 125C140 133.5 133.5 140 125 140C116.5 140 110 133.5 110 125C110 116.5 116.5 110 125 110ZM125 120C124.364 120.008 123.738 120.155 123.165 120.43C122.57 120.713 122.029 121.097 121.565 121.565C121.097 122.029 120.713 122.57 120.43 123.165C120.155 123.738 120.008 124.364 120 125C120 126.875 121.405 128.75 123.165 129.57C123.738 129.845 124.364 129.992 125 130C127.5 130 130 127.5 130 125C130 122.5 127.5 120 125 120Z" fill="#263238"/>
+<!-- </g> -->
+</g>
+<defs>
+<filter id="filter0_d_622_386" x="26" y="25" width="138" height="143" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_622_386"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_622_386" result="shape"/>
+</filter>
+<clipPath id="clip0_622_386">
+<rect width="160" height="160" fill="white"/>
+</clipPath>
+</defs>
+</svg>

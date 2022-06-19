@@ -1,0 +1,130 @@
+@import '../../../../assets/styles/colors';
+
+.title {
+    ::ng-deep h2 {
+        font-size: 24px;
+        line-height: 32px;
+        color: $text-gray;
+    }
+}
+
+.job-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    max-height: 535px;
+
+    .job-timeline {
+        width: 50%;
+        padding-left: 10%;
+        overflow-y: auto;
+
+        ::ng-deep h3 {
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        .job-timeline-snapshots {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-height: 100%;
+
+            .job-timeline-item {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                position: relative;
+
+                .job-timeline-time {
+                    margin-left: -80px;
+                    position: absolute;
+                }
+
+                .job-timeline-line {
+                    height: 60px;
+                    width: 1px;
+                    margin: 0;
+                    border: solid 1px $text-gray;
+                }
+
+                .job-timeline-indicator {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    border: solid 2px;
+                    border-bottom-color: $text-gray;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    border-top-color: transparent;
+                    margin-right: 8px;
+                    margin-bottom: 12px;
+                    margin-left: -2px;
+                    transform: rotateZ(40deg);
+                }
+
+                .job-timeline-item-label {
+                    span {
+                        color: $text-gray;
+
+                        a {
+                            color: $light-blue-jbx !important;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.job-data {
+    color: $text-gray;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 40%;
+
+    .job-data-labels {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+
+        span {
+            margin: 8px 0;
+            padding: 16px;
+            border: solid 1px $text-gray;
+            border-radius: 4px;
+
+            &.description {
+                max-height: 220px;
+                overflow-y: auto;
+            }
+        }
+    }
+
+    .form-data {
+        .form-fields {
+            .file-list {
+                margin-bottom: 16px;
+                max-height: 100px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        }
+    }
+}
+
+.bottom-buttons {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-buttons {
+    button:first-of-type {
+        margin-right: 24px;
+    }
+}

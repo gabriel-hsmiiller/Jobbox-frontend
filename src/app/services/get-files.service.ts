@@ -16,4 +16,8 @@ export class GetFilesService extends BaseHttpService {
   getAvatarFile(path: string): Observable<any> {
     return super.getFile<any>('/uploads/avatars/' + path);
   }
+
+  getPortfolioFile(path: string): Observable<any> {
+    return super.getFile<any>('/uploads/portfolio/' + path);
+  }
 }

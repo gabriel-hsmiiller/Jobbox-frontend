@@ -7,6 +7,8 @@ import { LocalStorageKey } from 'src/app/enum/local-storage-key';
 import { User } from 'src/app/models/user';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { confirmPasswordValidator } from 'src/app/shared/validators/confirm-password';
+import { ConfirmDialog } from '../../../shared/confirm-dialog.component';
 
 @Component({
   selector: 'jbx-edit-profile-modal',
@@ -29,7 +31,7 @@ export class EditProfileModalComponent implements OnInit {
     private dialog: MatDialog,
     private localStorageService: LocalStorageService,
     private router: Router) { 
-      const {phone, image, id, isConfirmed} = data;
+      const {phone, id, isConfirmed} = data;
       this.userId = id.toString();
       this.confirmedEmail = isConfirmed;
 
@@ -37,8 +39,8 @@ export class EditProfileModalComponent implements OnInit {
         phone: new FormControl(phone || ''),
         password: new FormControl(''),
         confirmPassword: new FormControl(''),
-        image: new FormControl(image || ''),
-      });
+        image: new FormControl(null),
+      }, { validators: [confirmPasswordValidator] });
   }
 
   ngOnInit(): void { }
@@ -49,8 +51,8 @@ export class EditProfileModalComponent implements OnInit {
 
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
       
+      reader.readAsDataURL(file);
       reader.onload = () => {
         const result = reader.result as string;
         this.imagePreview = result;
@@ -68,13 +70,17 @@ export class EditProfileModalComponent implements OnInit {
     const formData: FormData = new FormData();
 
     Object.keys(userData).forEach(key => {
-      if (userData[key] !== '') {
+      if (!!(userData[key])) {
+        console.log(key, !!(userData[key]));
         if (key === 'image') {
           formData.append(key, this.imageFile!);
         }
         formData.append(key, userData[key]);
       }
     });
+
+    console.log(userData);
+    console.log(formData.getAll('image'));
 
     try {
 
@@ -126,25 +132,3 @@ export class EditProfileModalComponent implements OnInit {
 
 }
 
-@Component({
-  template: `
-    <h2 mat-dialog-title style="font-size: 24px !important;">Atenção</h2>
-    <mat-dialog-content>
-      <span>Essa ação é potencialmente destrutiva e irreparável.</span><br><br>
-      <span>Continuar?</span>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button matDialogClose mat-flat-button>Não</button>
-        <button (click)="confirmAction()" mat-flat-button [color]="'warn'">Sim</button>
-    </mat-dialog-actions>
-  `
-})
-export class ConfirmDialog {
-
-  constructor(public dialogRef: MatDialogRef<ConfirmDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  confirmAction() {
-    this.data.onConfirm();
-  }
-}

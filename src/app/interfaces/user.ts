@@ -1,3 +1,7 @@
+import { IAdmin } from "./admin";
+import { IClient } from "./client";
+import { IColaborator } from "./colaborator";
+
 export interface IUser {
     id: number;
     email: string;
@@ -13,4 +17,7 @@ export interface IUser {
     deleted_at: Date;
     isActive: boolean;
     isConfirmed: boolean;
+    colaborator?: IColaborator;
+    client?: IClient;
+    admin?: IAdmin;
 }
